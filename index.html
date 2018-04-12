@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas</title>
+  </head>
+  <body>
+    <canvas id="myCanvas1" width="1000" height="600">
+
+
+    </canvas>
+<script type="text/javascript">
+  let canvas = document.querySelector("#myCanvas1");
+  let ctx1 = canvas.getContext("2d");
+
+  function triangle(debutX, debutY, milieuX, milieuY, finX, finY) {
+    ctx1.beginPath();
+    ctx1.moveTo(debutX, debutY); // début du triangle
+    ctx1.lineTo(milieuX, milieuY); // deuxième point
+    ctx1.lineTo(finX, finY); // troisième point
+    ctx1.closePath();
+    ctx1.stroke();
+  }
+
+  function trapeze(debutX, debutY, secBordX, secBordY, troisBordX, troisBordY, finX, finY){
+    ctx1.beginPath();
+    ctx1.moveTo(debutX, debutY);
+    ctx1.lineTo(secBordX, secBordY);
+    ctx1.lineTo(troisBordX, troisBordY);
+    ctx1.lineTo(finX, finY);
+    ctx1.closePath();
+    ctx1.stroke();
+  }
+
+  function ligne(debutX, debutY, finX, finY) {
+    ctx1.beginPath();
+    ctx1.moveTo(debutX, debutY);
+    ctx1.lineTo(finX, finY);
+    ctx1.closePath();
+    ctx1.stroke();
+  }
+
+  function rond(x, y, rayon) {
+    ctx1.beginPath();
+    ctx1.arc(x,y,rayon, 0, Math.PI*2, false);
+    ctx1.closePath();
+    ctx1.stroke();
+  }
+
+
+  // triangle(100,100,150,150,50,150);
+  // ligne(100,100,100,175);
+  // trapeze(25,175,175,175,150,225,50,225);
+  // rond(100,200,10);
+  // rond(65,200,10);
+  // rond(135,200,10);
+
+  // ligne verticale
+  let debutX = 0;
+  let debutY = 0;
+  let finX = 0;
+  let finY = 600;
+
+  for (let i = 0; i < 1000; i++) {
+    ligne(debutX,debutY,finX,finY);
+    debutX = debutX + 25;
+    finX = finX + 25;
+  }
+
+
+  // ligne horizontale
+  let beginX = 0;
+  let beginY = 0;
+  let endX = 1000;
+  let endY = 0;
+  for (let i = 0; i<700; i++) {
+    ligne(beginX, beginY, endX, endY);
+    beginY = beginY + 25;
+    endY = endY + 25;
+  }
+
+  let random = function() {
+    return Math.floor(Math.random()*250 + 1);
+  }
+
+  function carre(x,y,width) {
+    ctx1.beginPath();
+    let a=random();
+    let b=random();
+    let c=random();
+    console.log(a,b,c);
+    ctx1.fillStyle = 'rgb('+a+','+b+','+c+')';
+    ctx1.fill();
+    ctx1.fillRect(x,y,width,width);
+    ctx1.closePath();
+  }
+
+  let axeX = document.getElementById("myCanvas1");
+  let axeY = document.getElementById("myCanvas1");
+
+
+
+  document.addEventListener("mousemove", function(event) {
+    let x = event.offsetX;
+    let y = event.offsetY;
+    let resteY = event.offsetY % 25;
+    let resteX = event.offsetX % 25;
+    newX = event.offsetX - resteX;
+    newY = event.offsetY - resteY;
+
+    carre(newX,newY,25);
+  })
+
+
+
+</script>
+  </body>
+</html>
